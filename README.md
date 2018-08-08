@@ -30,10 +30,10 @@ mdns.start(() => setTimeout(() => mdns.stop(), 20 * 1000))
   - `announce` (boolean) announce our presence through mDNS, default true
   - `discoveryInterval` (number) interval between discovery runs, default 10 seconds
 
-  ## Contribute
+## Contribute
 
-  Feel free to dive in! [Open an issue](https://github.com/alanshaw/js-libp2p-webext-mdns/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/alanshaw/js-libp2p-webext-mdns/issues/new) or submit PRs.
 
-  ## License
+## License
 
-  [MIT](LICENSE) © Alan Shaw
+[MIT](LICENSE) © Alan Shaw
