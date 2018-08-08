@@ -22,7 +22,7 @@ module.exports = async function announce (peerInfo) {
   const peerId = peerInfo.id.toB58String()
 
   const attributes = multiaddrs.reduce((attrs, addr, i) => {
-    attrs['dnsaddr' + (i || '')] = addr
+    attrs['dnsaddr' + (i || '')] = addr.toString()
     return attrs
   }, {})
 
