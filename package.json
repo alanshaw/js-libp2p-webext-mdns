@@ -1,6 +1,6 @@
 {
   "name": "libp2p-webext-mdns",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "libp2p web extension mDNS discovery",
   "leadMaintainer": "Alan Shaw <alan@tableflip.io>",
   "main": "src/index.js",
