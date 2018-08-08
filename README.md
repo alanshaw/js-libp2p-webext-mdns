@@ -29,3 +29,11 @@ mdns.start(() => setTimeout(() => mdns.stop(), 20 * 1000))
   - `peerInfo` ([PeerInfo](https://www.npmjs.com/package/peer-info)) (required) PeerInfo to announce
   - `announce` (boolean) announce our presence through mDNS, default true
   - `discoveryInterval` (number) interval between discovery runs, default 10 seconds
+
+  ## Contribute
+
+  Feel free to dive in! [Open an issue](https://github.com/alanshaw/js-libp2p-webext-mdns/issues/new) or submit PRs.
+
+  ## License
+
+  [MIT](LICENSE) © Alan Shaw

@@ -5,13 +5,7 @@
   "leadMaintainer": "Alan Shaw <alan@tableflip.io>",
   "main": "src/index.js",
   "scripts": {
-    "lint": "aegir lint",
-    "coverage": "aegir coverage",
-    "test": "aegir test -t node",
-    "release": "aegir release -t node --no-build",
-    "release-minor": "aegir release --type minor -t node --no-build",
-    "release-major": "aegir release --type major -t node --no-build",
-    "coverage-publish": "aegir coverage publish"
+    "lint": "standard"
   },
   "repository": {
     "type": "git",
@@ -35,13 +29,13 @@
   },
   "homepage": "https://github.com/alanshaw/js-libp2p-webext-mdns",
   "devDependencies": {
-    "aegir": "^14.0.0",
-    "babel-eslint": "^8.2.6"
+    "babel-eslint": "^8.2.6",
+    "standard": "^11.0.1"
   },
   "dependencies": {
     "libp2p-tcp": "~0.12.0",
     "multiaddr": "^5.0.0",
-    "peer-id": "~0.10.7",
+    "peer-id": "~0.11.0",
     "peer-info": "~0.14.1"
   },
   "standard": {
