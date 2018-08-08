@@ -1,7 +1,8 @@
 'use strict'
 
-const log = require('debug')('libp2p:webext-mdns:announce')
+const log = require('debug')('libp2p:webext-mdns')
 const EventEmitter = require('events').EventEmitter
+const setImmediate = require('async/setImmediate')
 const discover = require('./discover')
 const announce = require('./announce')
 
