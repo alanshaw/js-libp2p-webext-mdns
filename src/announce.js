@@ -17,7 +17,8 @@ module.exports = async function announce (peerInfo) {
     return null
   }
 
-  const port = multiaddrs[0].toString().split('/')[4]
+  // FIXME get TCP tuple value
+  const port = parseInt(multiaddrs[0].toString().split('/')[4])
   const peerId = peerInfo.id.toB58String()
 
   const attributes = multiaddrs.reduce((attrs, addr, i) => {
