@@ -9,6 +9,9 @@ const tcp = new TCP()
 module.exports = async function announce (peerInfo) {
   const multiaddrs = tcp.filter(peerInfo.multiaddrs.toArray())
 
+  multiaddrs.push(fakeTcpAddr())
+  log('announcing fake addr', multiaddrs[multiaddrs.length - 1])
+
   if (!multiaddrs.length) {
     log('no tcp addrs to announce')
     return null
@@ -29,4 +32,15 @@ module.exports = async function announce (peerInfo) {
     port,
     attributes
   })
+}
+
+function fakeTcpAddr () {
+  const ip = Array.from(Array(4), () => randomInt(0, 255)).join('.')
+  return `/ip4/${ip}/tcp/4002`
+}
+
+function randomInt (min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min)) + min
 }
