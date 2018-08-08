@@ -5,8 +5,6 @@
 const log = require('debug')('libp2p:webext-mdns:discover')
 const PeerId = require('peer-id')
 const PeerInfo = require('peer-info')
-const { promisify } = require('utils')
-const createPeerInfo = promisify(PeerInfo.create)
 const Multiaddr = require('multiaddr')
 
 module.exports = function discover (onPeer, options) {
@@ -60,7 +58,12 @@ module.exports = function discover (onPeer, options) {
 
 async function serviceToPeerInfo (service) {
   const peerId = PeerId.createFromB58String(service.name)
-  const peerInfo = await createPeerInfo(peerId)
+  const peerInfo = await new Promise((resolve, reject) => {
+    PeerInfo.create(peerId, (err, peerInfo) => {
+      if (err) return reject(err)
+      resolve(peerInfo)
+    })
+  })
 
   const multiaddrs = Object.keys(service.attributes).reduce((addrs, key) => {
     if (key.startsWith('dnsaddr')) {
