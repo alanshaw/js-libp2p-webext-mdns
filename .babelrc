@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    "syntax-object-rest-spread",
+    "syntax-async-generators"
+  ]
+}

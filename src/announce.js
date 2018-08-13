@@ -14,11 +14,11 @@ module.exports = async function announce (peerInfo) {
     return null
   }
 
-  const port = multiaddrs[0].toString().split('/')[4]
+  const port = parseInt(multiaddrs[0].nodeAddress().port)
   const peerId = peerInfo.id.toB58String()
 
   const attributes = multiaddrs.reduce((attrs, addr, i) => {
-    attrs['dnsaddr' + (i || '')] = addr
+    attrs['dnsaddr' + (i || '')] = addr.toString()
     return attrs
   }, {})
 
