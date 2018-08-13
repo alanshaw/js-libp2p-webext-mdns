@@ -30,6 +30,8 @@
   "homepage": "https://github.com/alanshaw/js-libp2p-webext-mdns",
   "devDependencies": {
     "babel-eslint": "^8.2.6",
+    "babel-plugin-syntax-async-generators": "^6.13.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
     "standard": "^11.0.1"
   },
   "dependencies": {
