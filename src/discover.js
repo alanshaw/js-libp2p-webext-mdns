@@ -65,6 +65,7 @@ async function serviceToPeerInfo (service) {
     })
   })
 
+  /* https://github.com/mozilla/libdweb/issues/48
   const multiaddrs = Object.keys(service.attributes).reduce((addrs, key) => {
     if (key.startsWith('dnsaddr')) {
       try {
@@ -75,6 +76,10 @@ async function serviceToPeerInfo (service) {
     }
     return addrs
   }, [])
+  */
+  const multiaddrs = service.addresses.map(a => {
+    return new Multiaddr(`/ip${a.includes(':') ? 6 : 4}/${a}/tcp/${service.port}`)
+  })
 
   multiaddrs.forEach((addr) => peerInfo.multiaddrs.add(addr))
 
