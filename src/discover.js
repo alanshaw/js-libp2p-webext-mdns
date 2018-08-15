@@ -2,29 +2,27 @@
 
 'use strict'
 
-const log = require('debug')('libp2p:webext-mdns:discover')
+const debug = require('debug')
 const PeerId = require('peer-id')
 const PeerInfo = require('peer-info')
 const Multiaddr = require('multiaddr')
 
 module.exports = function discover (onPeer, options) {
   options = options || {}
-  options.interval = options.interval || 10 * 1000
+  options.type = options.type || 'p2p'
+  options.protocol = options.protocol || 'udp'
 
+  const log = debug(`libp2p:webext-mdns:discover:${options.type}:${options.protocol}`)
   const handle = {}
 
   const doDiscover = async () => {
-    log('discovery started')
+    log('started', options)
 
-    const services = browser.ServiceDiscovery.discover({
-      type: 'p2p',
-      protocol: 'udp'
-    })
+    const services = browser.ServiceDiscovery.discover(options)
 
-    handle.canceled = false
     handle.cancel = () => {
-      handle.canceled = true
-      return handle.discovery
+      log('canceled', options)
+      services.return()
     }
 
     try {
@@ -36,22 +34,15 @@ module.exports = function discover (onPeer, options) {
         }
         log('found service', service)
         onPeer(await serviceToPeerInfo(service))
-        if (handle.canceled) return
       }
     } catch (err) {
       log(err)
     }
 
-    const rediscover = setTimeout(() => {
-      log(`discovering again in ${options.interval}ms`)
-      handle.discovery = doDiscover()
-    }, options.interval)
-
-    handle.cancel = async () => clearTimeout(rediscover)
-    log('discovery ended')
+    log('ended')
   }
 
-  handle.discovery = doDiscover()
+  doDiscover()
 
   return handle
 }

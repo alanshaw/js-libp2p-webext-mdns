@@ -2,11 +2,17 @@
 
 'use strict'
 
-const log = require('debug')('libp2p:webext-mdns:announce')
+const debug = require('debug')
 const TCP = require('libp2p-tcp')
 const tcp = new TCP()
 
-module.exports = async function announce (peerInfo) {
+module.exports = async function announce (peerInfo, options) {
+  options = options || {}
+  options.type = options.type || 'p2p'
+  options.protocol = options.protocol || 'udp'
+
+  const log = debug(`libp2p:webext-mdns:announce:${options.type}:${options.protocol}`)
+
   const multiaddrs = tcp.filter(peerInfo.multiaddrs.toArray())
 
   if (!multiaddrs.length) {
@@ -22,10 +28,12 @@ module.exports = async function announce (peerInfo) {
     return attrs
   }, {})
 
+  log('annoucing', peerId, attributes)
+
   return browser.ServiceDiscovery.announce({
     name: peerId,
-    type: 'p2p',
-    protocol: 'udp',
+    type: options.type,
+    protocol: options.protocol,
     port,
     attributes
   })
